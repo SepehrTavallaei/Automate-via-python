@@ -17,9 +17,13 @@ count = 0
 while success:
     faces = face_cascaed.detectMultiScale(frame,1.1,4)
     for (x,y,w,h) in faces:
+        # draw a rectangle around the face
         cv2.rectangle(frame,(x,y),(x+w,y+h),(255,255,255),4)
+    # we set the title of the window
     cv2.imshow('Recording ... ', frame)
+    # we set key to 1 miliseconds this means the program will wait.
     key = cv2.waitKey(1)
+    # here we say if user press button q on the keyborad you should exit recording the webcam
     if key == ord('q'):
         break
     output.write(frame)
@@ -27,6 +31,7 @@ while success:
     count +=1
     print(count)
 
+# its a good practice to release this variables and also destroy the opened windows.
 output.release()
 video.release()
 cv2.destroyAllWindows()
